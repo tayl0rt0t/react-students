@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import Students from './student';
 import './App.css';
+import Score from './score';
+import students from './data/data';
 
 function App() {
+  const [studentData, setStudentData] = useState(students)
+  
+  const stuff = studentData.map((stu)=><p>{stu.name} <p>{stu.bio}</p></p>);
+  // const bios = studentData.map((stu)=><p>{stu.bio}</p>)
+  const score = studentData.map((item)=>{
+    return item.scores.map((item)=><p>{item.score}</p>)
+  })
+  
   return (
+    
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className='students'>
+      <Students 
+      stuff = {stuff}
+      />
+      </div>
+      <div className='score'>
+      <Score score={score}/>
+      </div>
+
+      {/* <Score score = {score} /> */}
     </div>
   );
 }
